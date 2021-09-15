@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "advanced-data-engineering-bootcamp"
+version = "0.1.0"
+description = ""
+authors = ["Felipe Whitaker <felipewhitaker@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+fake-web-events = {git = "https://github.com/felipewhitaker/fake-web-events"}
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
