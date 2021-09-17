@@ -141,3 +141,4 @@ jenkins_module/jenkins_home
 airflow_module/logs
 
 cdk.out
+!cdk.json
