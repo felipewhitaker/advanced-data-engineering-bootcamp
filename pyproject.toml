@@ -7,6 +7,7 @@ authors = ["Felipe Whitaker <felipewhitaker@gmail.com>"]
 [tool.poetry.dependencies]
 python = "^3.8"
 fake-web-events = {git = "https://github.com/felipewhitaker/fake-web-events"}
+"aws-cdk.core" = "^1.122.0"
 
 [tool.poetry.dev-dependencies]
 
