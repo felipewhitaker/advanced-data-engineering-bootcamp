@@ -32,7 +32,7 @@ class BaseDataLakeBucket(s3.Bucket):
         Sets lifecycle rule by default
         """
         self.add_lifecycle_rule(
-            abort_incomplete_multipart_upload_after=core.Duration.days(7), enabled=True
+            abort_incomplete_multipart_upload_after = core.Duration.days(7), enabled=True
         )
         self.add_lifecycle_rule(
             transitions = [
@@ -44,7 +44,7 @@ class BaseDataLakeBucket(s3.Bucket):
             noncurrent_version_transitions = [
                 s3.NoncurrentVersionTransition(
                     storage_class = s3.StorageClass.INFREQUENT_ACCESS,
-                    transition_after = core.Duration.days(15),
+                    transition_after = core.Duration.days(30),
                 ),
             ]
         )
