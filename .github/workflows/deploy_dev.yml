@@ -15,13 +15,30 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Setup
-        uses: ./.github/actions/setup
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'
+
+      - uses: actions/setup-node@v2-beta
+        with:
+          node-version: '12'
+
+      - name: Install Poetry
+        run: |
+          pip install poetry
+
+      - name: Install dependencies
+        run: |
+          npm install -g aws-cdk
+          poetry install
 
       - name: Deploy
-        uses: ./.github/actions/deploy
-        with:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
-          ENVIRONMENT: ${{ secrets.ENVIRONMENT }}
+        env:
+          AWS_ACCESS_KEY_ID: ${{ inputs.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ inputs.AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: ${{ inputs.AWS_DEFAULT_REGION }}
+          ENVIRONMENT: ${{ inputs.ENVIRONMENT }}
+        run: |
+          poetry run cdk bootstrap
+          poetry run cdk deploy "*" --require-approval never
