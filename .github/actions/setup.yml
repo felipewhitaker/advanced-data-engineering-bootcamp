@@ -7,22 +7,20 @@ jobs:
     environment: develop
 
     steps:
-    - uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'
 
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: '3.8'
+      - uses: actions/setup-node@v2-beta
+        with:
+          node-version: '12'
 
-    - uses: actions/setup-node@v2-beta
-      with:
-        node-version: '12'
+      - name: Install Poetry
+        run: |
+          pip install poetry
 
-    - name: Install Poetry
-      run: |
-        pip install poetry
-
-    - name: Install dependencies
-      run: |
-        npm install -g aws-cdk
-        poetry install
+      - name: Install dependencies
+        run: |
+          npm install -g aws-cdk
+          poetry install
