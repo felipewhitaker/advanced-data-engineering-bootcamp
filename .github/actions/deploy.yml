@@ -1,0 +1,32 @@
+name: 'Deploy'
+description: 'Deploy AWS stack using its cdk'
+
+inputs:
+  AWS_ACCESS_KEY_ID: 
+    description: "AWS_ACCESS_KEY_ID"
+    required: true
+  AWS_SECRET_ACCESS_KEY:
+    description: "AWS_SECRET_ACCESS_KEY"
+    required: true
+  AWS_DEFAULT_REGION: 
+    description: "AWS_DEFAULT_REGION"
+    required: true
+  ENVIRONMENT: 
+    description: "ENVIRONMENT"
+    required: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: develop
+
+    steps:
+    - name: Deploy
+      env:
+        AWS_ACCESS_KEY_ID: ${{ inputs.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ inputs.AWS_SECRET_ACCESS_KEY }}
+        AWS_DEFAULT_REGION: ${{ inputs.AWS_DEFAULT_REGION }}
+        ENVIRONMENT: ${{ inputs.ENVIRONMENT }}
+      run: |
+        poetry run cdk bootstrap
+        poetry run cdk deploy "*" --require-approval never
