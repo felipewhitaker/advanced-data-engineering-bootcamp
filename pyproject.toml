@@ -10,6 +10,7 @@ fake-web-events = {git = "https://github.com/felipewhitaker/fake-web-events"}
 "aws-cdk.core" = "^1.122.0"
 "aws-cdk.aws-s3" = "^1.124.0"
 "aws-cdk.aws-kinesisfirehose" = "^1.142.0"
+boto3 = "^1.20.46"
 
 [tool.poetry.dev-dependencies]
 poetry2setup = "^1.0.0"
