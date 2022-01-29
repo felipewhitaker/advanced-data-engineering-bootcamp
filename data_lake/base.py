@@ -22,6 +22,7 @@ class BaseDataLakeBucket(s3.Bucket):
             block_public_access = s3.BlockPublicAccess.BLOCK_ALL,
             encryption = s3.BucketEncryption.S3_MANAGED,
             versioned = True,
+            removal_policy = core.RemovalPolicy.DESTROY,
             **kwargs
         )
 

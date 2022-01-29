@@ -7,11 +7,11 @@ from data_lake.base import BaseDataLakeBucket, DataLakeLayer
 class DataLakeStack(core.Stack):
 
     def __init__(self, scope: core.Construct, **kwargs):
-        self.deploy_env = os.environ["ENVIRONMENT"]
+        self.deploy_env = os.environ.get("ENVIRONMENT", "local")
         super().__init__(scope, id = f"{self.deploy_env}-datalake-stack", **kwargs)
 
-        self.datalake_raw_bucket = BaseDataLakeBucket(self, layer = DataLakeLayer.RAW)
-        self.datalake_raw_bucket.add_lifecycle_rule(
+        self.data_lake_raw_bucket = BaseDataLakeBucket(self, layer = DataLakeLayer.RAW)
+        self.data_lake_raw_bucket.add_lifecycle_rule(
             transitions = [
                 s3.Transition(
                     storage_class = s3.StorageClass.INTELLIGENT_TIERING,
